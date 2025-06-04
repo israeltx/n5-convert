@@ -23,13 +23,13 @@ form.addEventListener('submit', (event) => {
   
   switch (currency.value) {
     case 'USD':
-      convertCurrency(amount.value, USD, 'US$')
+      convertCurrency(amount.value, USD, 'US$');
       break;
     case 'EUR':
-      convertCurrency(amount.value, EUR, '€')
+      convertCurrency(amount.value, EUR, '€');
       break;
     case 'GBP':
-      convertCurrency(amount.value, GBP, '£')
+      convertCurrency(amount.value, GBP, '£');
       break;
   }
 });
@@ -37,13 +37,23 @@ form.addEventListener('submit', (event) => {
 // Currceny convertion function
 function convertCurrency(amount, price, symbol) {
   try {
-    description.textContent = `${symbol} 1 = ${price}`
+    // Show selected currency price
+    description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
     // Add class to show the footer with results
-    footer.classList.add('show-result')
+    footer.classList.add('show-result');
   } catch (error) {
     // Remove class from footer to hide it
-    footer.classList.remove('show-result')
-    console.log(error)
-    alert('Não foi possível fazer a conversão. Por favor, tente mais tarde')
+    footer.classList.remove('show-result');
+    console.log(error);
+    alert('Não foi possível fazer a conversão. Por favor, tente mais tarde');
   }
-}
+};
+
+// Format the currency in Brazilian Reais
+function formatCurrencyBRL(value) {
+  // 1st convert to number to use method for formatting (R$ 00,00)
+  return Number(value).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+};
