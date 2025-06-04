@@ -7,7 +7,8 @@ const GBP = 7.65;
 const form = document.querySelector('form');
 const amount = document.getElementById('amount');
 const currency = document.getElementById('currency');
-const footer = document.querySelector('main footer')
+const footer = document.querySelector('main footer');
+const description = document.getElementById('description');
 
 // Get only numbers from the amount input
 amount.addEventListener('input', () => {
@@ -17,6 +18,7 @@ amount.addEventListener('input', () => {
 
 // Lister the submit event from the form
 form.addEventListener('submit', (event) => {
+
   event.preventDefault();
   
   switch (currency.value) {
@@ -35,6 +37,7 @@ form.addEventListener('submit', (event) => {
 // Currceny convertion function
 function convertCurrency(amount, price, symbol) {
   try {
+    description.textContent = `${symbol} 1 = ${price}`
     // Add class to show the footer with results
     footer.classList.add('show-result')
   } catch (error) {
