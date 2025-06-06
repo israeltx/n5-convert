@@ -17,7 +17,7 @@ amount.addEventListener('input', () => {
   amount.value = amount.value.replace(hasCharacterRegex, '');
 });
 
-// Lister the submit event from the form
+// Listen the submit event from the form
 form.addEventListener('submit', (event) => {
 
   event.preventDefault();
