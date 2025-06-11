@@ -118,7 +118,7 @@ function updateTotals() {
       const itemAmount = items[item].querySelector('.expense-amount')
 
       // Remove non numerical characters and replace commans for periods
-      let value = itemAmount.textContent.replace(/[^\d]/g, '').replace(',','.')
+      let value = itemAmount.textContent.replace(/[^\d,]/g, '').replace(',','.')
       
       // Convert the value to float
       value = parseFloat(value)
@@ -132,8 +132,18 @@ function updateTotals() {
       total += Number(value)
     }
 
-    // Exibit the total value
-    expensesTotal.textContent = total
+    // Create a span to add the formatted currency (R$)
+    const symbolBRL = document.createElement('small')
+    symbolBRL.textContent = 'R$'
+
+    // Remove the formatting from the function for a custom element
+    total = formatCurrencyBRL(total).toUpperCase().replace('R$', '')
+
+    // Clean the element HTML
+    expensesTotal.innerHTML = ''
+
+    // Add the R$ symbol and total value formatted
+    expensesTotal.append(symbolBRL, total)
 
   } catch (error) {
     console.log(error);
