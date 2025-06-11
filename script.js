@@ -6,6 +6,7 @@ const category = document.getElementById('category')
 
 // Select the list elements
 const expenseList = document.querySelector('ul')
+const expensesTotal = document.querySelector('aside header h2')
 const expenseQuantity = document.querySelector('aside header p span')
 
 // Capture input event for formatting
@@ -116,9 +117,23 @@ function updateTotals() {
     for (let item = 0; item < items.length; item++) {
       const itemAmount = items[item].querySelector('.expense-amount')
 
-      console.log(itemAmount);
+      // Remove non numerical characters and replace commans for periods
+      let value = itemAmount.textContent.replace(/[^\d]/g, '').replace(',','.')
       
+      // Convert the value to float
+      value = parseFloat(value)
+
+      // Verify if it's a valid number
+      if(isNaN(value)) {
+        return alert('Insira um número válido')
+      }
+
+      // Increment the total value
+      total += Number(value)
     }
+
+    // Exibit the total value
+    expensesTotal.textContent = total
 
   } catch (error) {
     console.log(error);
